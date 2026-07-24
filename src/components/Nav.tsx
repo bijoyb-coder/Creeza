@@ -7,6 +7,7 @@ const links = [
   { to: "/services", label: "Services" },
   { to: "/innovation", label: "Innovation" },
   { to: "/projects", label: "Projects" },
+  { to: "/why-creeza", label: "Why Creeza" },
   { to: "/about", label: "About" },
   { to: "/careers", label: "Careers" },
   { to: "/contact", label: "Contact" },
