@@ -1,0 +1,329 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Menlo", "Consolas", "Roboto Mono", monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-glass: var(--glass);
+  --color-glass-soft: var(--glass-soft);
+  --color-bronze: var(--bronze);
+  --color-bronze-soft: var(--bronze-soft);
+  --color-steel: var(--steel);
+  --color-line: var(--line);
+  --color-card: var(--card);
+
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--paper);
+  --color-muted: var(--paper-2);
+  --color-muted-foreground: var(--steel);
+  --color-border: var(--line);
+  --color-accent: var(--glass);
+  --color-ring: var(--glass);
+  --color-input: var(--line);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--ink);
+  --color-secondary: var(--paper-2);
+  --color-secondary-foreground: var(--ink);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: var(--paper);
+  --color-card-foreground: var(--ink);
+
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+}
+
+:root {
+  --paper: #F5F4EF;
+  --paper-2: #ECE9E0;
+  --ink: #12181A;
+  --ink-soft: #3C4548;
+  --glass: #4F8577;
+  --glass-soft: #7FA89B;
+  --bronze: #9C7A46;
+  --bronze-soft: #AD8A55;
+  --steel: #5C6670;
+  --line: rgba(18,24,26,0.14);
+  --card: #FFFFFC;
+  --radius: 2px;
+}
+
+.dark {
+  --paper: #0B1112;
+  --paper-2: #111A1B;
+  --ink: #ECE9E0;
+  --ink-soft: #B9C0BE;
+  --glass: #8FC0B0;
+  --glass-soft: #7FA89B;
+  --bronze: #D2AC72;
+  --bronze-soft: #AD8A55;
+  --steel: #8B969C;
+  --line: rgba(236,233,224,0.14);
+  --card: #0E1617;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --paper: #0B1112;
+    --paper-2: #111A1B;
+    --ink: #ECE9E0;
+    --ink-soft: #B9C0BE;
+    --glass: #8FC0B0;
+    --bronze: #D2AC72;
+    --steel: #8B969C;
+    --line: rgba(236,233,224,0.14);
+    --card: #0E1617;
+  }
+}
+
+@layer base {
+  * { border-color: var(--line); }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-feature-settings: "ss01","kern";
+  }
+  h1, h2, h3, h4 { font-family: var(--font-serif); letter-spacing: -0.02em; line-height: 1.1; color: var(--ink); }
+  p { max-width: 68ch; }
+  ::selection { background: var(--glass); color: var(--paper); }
+}
+
+@utility mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@utility eyebrow-rule {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--bronze);
+  }
+}
+
+@utility container-x {
+  padding-left: clamp(24px, 5vw, 80px);
+  padding-right: clamp(24px, 5vw, 80px);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1440px;
+  width: 100%;
+}
+
+@utility btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 24px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  transition: opacity 400ms ease, transform 400ms ease;
+  &:hover { opacity: 0.88; }
+}
+
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 24px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  transition: background 400ms ease, color 400ms ease;
+  &:hover { background: var(--ink); color: var(--paper); }
+}
+
+@utility btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 14px;
+  border-radius: 980px;
+  border: 1px solid currentColor;
+  transition: opacity 400ms ease;
+  &:hover { opacity: 0.85; }
+}
+
+@utility link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--glass);
+  font-size: 14px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 300ms ease;
+  &:hover { border-bottom-color: var(--glass); }
+}
+
+@utility hairline {
+  border-top: 1px solid var(--line);
+}
+
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal { animation: fade-rise 0.7s ease both; }
+.reveal-hidden { opacity: 0; transform: translateY(10px); }
+.reveal-in { animation: fade-rise 0.7s ease forwards; }
+
+/* Architectural glare — a slow specular pass across the facade, followed by a
+   narrower hot core, with a gentle stationary bloom breathing behind them.
+   Timing and easing are tuned to feel like sunlight tracking a curtain wall,
+   not a swipe. Values stay subtle so glass detail survives underneath. */
+@keyframes hero-glare-pass {
+  0%   { transform: translate3d(-70%, -2%, 0) skewX(-14deg); opacity: 0; }
+  12%  { opacity: 0.42; }
+  38%  { opacity: 0.55; }
+  62%  { opacity: 0.30; }
+  88%  { opacity: 0; }
+  100% { transform: translate3d(180%, 2%, 0) skewX(-14deg); opacity: 0; }
+}
+@keyframes hero-glare-core {
+  0%   { transform: translate3d(-40%, 1%, 0) skewX(-14deg); opacity: 0; }
+  22%  { opacity: 0.85; }
+  55%  { opacity: 0.55; }
+  85%  { opacity: 0; }
+  100% { transform: translate3d(200%, -1%, 0) skewX(-14deg); opacity: 0; }
+}
+@keyframes hero-glare-bloom {
+  0%, 100% { opacity: 0.18; transform: scale(1); }
+  50%      { opacity: 0.32; transform: scale(1.04); }
+}
+
+.hero-sheen {
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Stationary sun bloom — anchored high-right where sky meets glass. */
+.hero-sheen {
+  background:
+    radial-gradient(
+      42% 60% at 78% 18%,
+      color-mix(in oklab, var(--glass-soft) 55%, transparent) 0%,
+      color-mix(in oklab, var(--glass) 20%, transparent) 45%,
+      transparent 78%
+    );
+  animation: hero-glare-bloom 14s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+.hero-sheen::before,
+.hero-sheen::after {
+  content: "";
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+/* Broad specular pass — soft, warm, sun-tinted halo across the whole facade. */
+.hero-sheen::before {
+  width: 34%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    color-mix(in oklab, var(--glass) 14%, transparent) 28%,
+    color-mix(in oklab, var(--glass-soft) 44%, transparent) 50%,
+    color-mix(in oklab, var(--glass) 14%, transparent) 72%,
+    transparent 100%
+  );
+  filter: blur(14px);
+  transform: translate3d(-70%, 0, 0) skewX(-14deg);
+  animation: hero-glare-pass 13s cubic-bezier(0.16, 0.62, 0.24, 1) infinite;
+}
+/* Hot specular core — narrow, sharper, delayed so it trails the halo. */
+.hero-sheen::after {
+  width: 6%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    color-mix(in oklab, var(--glass-soft) 78%, transparent) 45%,
+    color-mix(in oklab, #ffffff 55%, transparent) 50%,
+    color-mix(in oklab, var(--glass-soft) 78%, transparent) 55%,
+    transparent 100%
+  );
+  filter: blur(4px);
+  transform: translate3d(-40%, 0, 0) skewX(-14deg);
+  animation: hero-glare-core 13s cubic-bezier(0.22, 0.7, 0.28, 1) infinite;
+  animation-delay: 1.6s;
+  opacity: 0;
+}
+
+
+/* Per-slide colour grading — normalises exposure, sky hue and glass highlights
+   across the four source frames so the sequence reads as one continuous scene
+   at every viewport size. Values are conservative to preserve source detail. */
+.hero-slide-img {
+  filter: saturate(0.92) contrast(1.04) brightness(1.02) hue-rotate(-4deg);
+}
+.hero-slide-img:nth-of-type(1) {
+  filter: saturate(0.9) contrast(1.05) brightness(1.0) hue-rotate(-3deg);
+}
+.hero-slide-img:nth-of-type(2) {
+  filter: saturate(0.95) contrast(1.03) brightness(1.03) hue-rotate(-6deg);
+}
+.hero-slide-img:nth-of-type(3) {
+  filter: saturate(0.88) contrast(1.06) brightness(1.02) hue-rotate(-2deg);
+}
+.hero-slide-img:nth-of-type(4) {
+  filter: saturate(0.94) contrast(1.04) brightness(1.04) hue-rotate(-5deg);
+}
+
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal-hidden { opacity: 1 !important; transform: none !important; }
+  /* Hero glare: hold a calm, non-moving state instead of a frozen mid-sweep. */
+  .hero-sheen { animation: none !important; opacity: 0.22 !important; transform: none !important; }
+  .hero-sheen::before,
+  .hero-sheen::after { animation: none !important; opacity: 0 !important; transform: none !important; }
+}
+
