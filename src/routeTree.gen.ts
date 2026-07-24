@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ArchitecturalGlassRouteImport } from './routes/architectural-glass'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as InnovationRouteImport } from './routes/innovation'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SpecialityGlassRouteImport } from './routes/speciality-glass'
+import { Route as SuntuitiveGlassRouteImport } from './routes/suntuitive-glass'
 import { Route as WhyCreezaRouteImport } from './routes/why-creeza'
 
 const IndexRoute = IndexRouteImport.update({
@@ -27,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArchitecturalGlassRoute = ArchitecturalGlassRouteImport.update({
+  id: '/architectural-glass',
+  path: '/architectural-glass',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -59,6 +67,16 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SpecialityGlassRoute = SpecialityGlassRouteImport.update({
+  id: '/speciality-glass',
+  path: '/speciality-glass',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuntuitiveGlassRoute = SuntuitiveGlassRouteImport.update({
+  id: '/suntuitive-glass',
+  path: '/suntuitive-glass',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WhyCreezaRoute = WhyCreezaRouteImport.update({
   id: '/why-creeza',
   path: '/why-creeza',
@@ -68,35 +86,44 @@ const WhyCreezaRoute = WhyCreezaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/architectural-glass': typeof ArchitecturalGlassRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/innovation': typeof InnovationRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/speciality-glass': typeof SpecialityGlassRoute
+  '/suntuitive-glass': typeof SuntuitiveGlassRoute
   '/why-creeza': typeof WhyCreezaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/architectural-glass': typeof ArchitecturalGlassRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/innovation': typeof InnovationRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/speciality-glass': typeof SpecialityGlassRoute
+  '/suntuitive-glass': typeof SuntuitiveGlassRoute
   '/why-creeza': typeof WhyCreezaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/architectural-glass': typeof ArchitecturalGlassRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/innovation': typeof InnovationRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/speciality-glass': typeof SpecialityGlassRoute
+  '/suntuitive-glass': typeof SuntuitiveGlassRoute
   '/why-creeza': typeof WhyCreezaRoute
 }
 export interface FileRouteTypes {
@@ -104,46 +131,58 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/architectural-glass'
     | '/careers'
     | '/contact'
     | '/innovation'
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/speciality-glass'
+    | '/suntuitive-glass'
     | '/why-creeza'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/architectural-glass'
     | '/careers'
     | '/contact'
     | '/innovation'
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/speciality-glass'
+    | '/suntuitive-glass'
     | '/why-creeza'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/architectural-glass'
     | '/careers'
     | '/contact'
     | '/innovation'
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/speciality-glass'
+    | '/suntuitive-glass'
     | '/why-creeza'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ArchitecturalGlassRoute: typeof ArchitecturalGlassRoute
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
   InnovationRoute: typeof InnovationRoute
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SpecialityGlassRoute: typeof SpecialityGlassRoute
+  SuntuitiveGlassRoute: typeof SuntuitiveGlassRoute
   WhyCreezaRoute: typeof WhyCreezaRoute
 }
 
@@ -161,6 +200,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/architectural-glass': {
+      id: '/architectural-glass'
+      path: '/architectural-glass'
+      fullPath: '/architectural-glass'
+      preLoaderRoute: typeof ArchitecturalGlassRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -205,6 +251,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/speciality-glass': {
+      id: '/speciality-glass'
+      path: '/speciality-glass'
+      fullPath: '/speciality-glass'
+      preLoaderRoute: typeof SpecialityGlassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/suntuitive-glass': {
+      id: '/suntuitive-glass'
+      path: '/suntuitive-glass'
+      fullPath: '/suntuitive-glass'
+      preLoaderRoute: typeof SuntuitiveGlassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/why-creeza': {
       id: '/why-creeza'
       path: '/why-creeza'
@@ -218,12 +278,15 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ArchitecturalGlassRoute: ArchitecturalGlassRoute,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
   InnovationRoute: InnovationRoute,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SpecialityGlassRoute: SpecialityGlassRoute,
+  SuntuitiveGlassRoute: SuntuitiveGlassRoute,
   WhyCreezaRoute: WhyCreezaRoute,
 }
 export const routeTree = rootRouteImport

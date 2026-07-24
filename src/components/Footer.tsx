@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 export function Footer() {
   return (
     <footer className="border-t border-[color:var(--line)] bg-[color:var(--paper-2)] text-[color:var(--ink)]">
-      <div className="container-x py-20 grid grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="container-x py-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
         <div className="col-span-2 md:col-span-1">
           <div className="font-serif text-2xl tracking-widest">CREEZA SAFETY GLASS WORKS PVT.LTD</div>
           <p className="mono text-xs mt-4 text-[color:var(--steel)] leading-relaxed">
@@ -18,6 +18,14 @@ export function Footer() {
             <li><Link to="/services">Solar & Energy</Link></li>
             <li><Link to="/services">Interior</Link></li>
             <li><Link to="/services">Fire & Security</Link></li>
+          </ul>
+        </div>
+        <div>
+          <div className="eyebrow eyebrow-rule mb-4">Product List</div>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/architectural-glass">Architectural Glass</Link></li>
+            <li><Link to="/speciality-glass">Speciality Glass</Link></li>
+            <li><Link to="/suntuitive-glass">Suntuitive Glass</Link></li>
           </ul>
         </div>
         <div>
