@@ -1,10 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
+import { ApplyModal } from "@/components/ApplyModal";
 import heroImg from "@/assets/careers-page-hero.jpg";
 import lifeAtCreezaVideo from "@/assets/Visual.mp4";
+import cultureImg from "@/assets/careers2-large.webp";
 
 export const Route = createFileRoute("/careers")({
   head: () => ({
@@ -20,11 +23,41 @@ export const Route = createFileRoute("/careers")({
 });
 
 const openings = [
-  { role: "Coating Engineer", atelier: "Lucerne · CH", discipline: "R&D", lang: "DE / EN" },
-  { role: "Curtain-Wall Advisor", atelier: "Singapore · SG", discipline: "Technical Advisory", lang: "EN" },
-  { role: "Furnace Line Operator", atelier: "Stuttgart · DE", discipline: "Production", lang: "DE" },
-  { role: "BIPV Product Manager", atelier: "Barcelona · ES", discipline: "Solar", lang: "ES / EN" },
-  { role: "Automotive Quality Engineer", atelier: "Detroit · US", discipline: "Automotive", lang: "EN" },
+  {
+    role: "Coating Engineer",
+    atelier: "Lucerne · CH",
+    discipline: "R&D",
+    lang: "DE / EN",
+    description: "Develop and refine low-E and solar-control coatings on our in-house magnetron sputter line, working alongside the chemists who formulate every finish from scratch.",
+  },
+  {
+    role: "Curtain-Wall Advisor",
+    atelier: "Singapore · SG",
+    discipline: "Technical Advisory",
+    lang: "EN",
+    description: "Sit with architects and facade consultants through design development, translating performance targets into buildable curtain-wall specifications.",
+  },
+  {
+    role: "Furnace Line Operator",
+    atelier: "Stuttgart · DE",
+    discipline: "Production",
+    lang: "DE",
+    description: "Run and monitor the tempering furnace to hold tolerance across every pane, with structured training on quench cycles and quality checks.",
+  },
+  {
+    role: "BIPV Product Manager",
+    atelier: "Barcelona · ES",
+    discipline: "Solar",
+    lang: "ES / EN",
+    description: "Own the roadmap for our building-integrated photovoltaic glass line, from early-stage pilots through to certified production.",
+  },
+  {
+    role: "Automotive Quality Engineer",
+    atelier: "Detroit · US",
+    discipline: "Automotive",
+    lang: "EN",
+    description: "Lead ECE R43 compliance testing and root-cause analysis across our automotive glazing line, working directly with OEM quality teams.",
+  },
 ];
 
 const benefits = [
@@ -50,29 +83,6 @@ const terms = [
   "Shortlisted candidates will be contacted for an interview.",
   "New hires may be required to complete a post-offer screening, as applicable to the role.",
 ];
-
-// Media slots render as labeled placeholders until real photos/videos are supplied.
-// Once the admin panel's per-page content manager ships, each slot should resolve
-// to a `page_content` record keyed by page_slug "careers" instead of this static array.
-const galleryMedia = [
-  { type: "photo" as const, label: "Team at work" },
-  { type: "photo" as const, label: "Atelier floor" },
-  { type: "video" as const, label: "Life at Creeza" },
-  { type: "photo" as const, label: "Team celebration" },
-];
-
-function MediaPlaceholder({ type, label, className = "" }: { type: "photo" | "video"; label: string; className?: string }) {
-  return (
-    <div
-      className={`border border-dashed border-[color:var(--line)] bg-[color:var(--card)] flex flex-col items-center justify-center gap-2 text-center ${className}`}
-    >
-      <div className="mono text-[10px] uppercase tracking-[0.14em] text-[color:var(--steel)]">
-        {type === "video" ? "Video" : "Photo"} · pending
-      </div>
-      <div className="text-sm text-[color:var(--ink-soft)]">{label}</div>
-    </div>
-  );
-}
 
 // Plays once scrolled into view and pauses once it scrolls out, rather than autoplaying immediately on page load.
 function ScrollPlayVideo({ src, label, className = "" }: { src: string; label: string; className?: string }) {
@@ -106,6 +116,52 @@ function ScrollPlayVideo({ src, label, className = "" }: { src: string; label: s
       playsInline
       preload="metadata"
     />
+  );
+}
+
+function JobList() {
+  const [openRole, setOpenRole] = useState<string | null>(null);
+  const [applyRole, setApplyRole] = useState<string | null>(null);
+
+  return (
+    <div className="mt-12 border border-[color:var(--line)] bg-[color:var(--card)]">
+      <ul className="divide-y divide-[color:var(--line)]">
+        {openings.map((o) => {
+          const open = openRole === o.role;
+          return (
+            <li key={o.role}>
+              <button
+                onClick={() => setOpenRole(open ? null : o.role)}
+                className="w-full flex items-center justify-between gap-6 p-6 text-left"
+                aria-expanded={open}
+              >
+                <span className="font-serif text-lg">{o.role}</span>
+                <span className="flex items-center gap-2 mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--steel)] shrink-0">
+                  {open ? "Hide Details" : "Show Details"}
+                  <ChevronDown size={14} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+                </span>
+              </button>
+              <div
+                className="grid overflow-hidden transition-[grid-template-rows] duration-500"
+                style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+              >
+                <div className="min-h-0">
+                  <div className="px-6 pb-6">
+                    <div className="mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--steel)]">
+                      {o.atelier} · {o.discipline} · {o.lang}
+                    </div>
+                    <p className="mt-3 text-sm text-[color:var(--ink-soft)] max-w-2xl">{o.description}</p>
+                    <button onClick={() => setApplyRole(o.role)} className="mt-5 btn-solid">Apply</button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+
+      <ApplyModal role={applyRole ?? ""} open={applyRole !== null} onClose={() => setApplyRole(null)} />
+    </div>
   );
 }
 
@@ -153,25 +209,15 @@ function CareersPage() {
                   Browse currently available CREEZA SAFETY GLASS WORKS PVT.LTD job listings. Applications are accepted only for posted positions.
                 </p>
               </Reveal>
-              <Reveal delay={280}>
-                <Link to="/contact" className="mt-8 inline-flex btn-solid">Search Openings</Link>
-              </Reveal>
             </div>
             <Reveal delay={160}>
               <ScrollPlayVideo src={lifeAtCreezaVideo} label="Life at Creeza" className="w-full aspect-video md:justify-self-end" />
             </Reveal>
           </div>
 
-          <div className="mt-12 border border-[color:var(--line)] bg-[color:var(--card)]">
-            <ul className="divide-y divide-[color:var(--line)]">
-              {openings.map((o) => (
-                <li key={o.role} className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-1">
-                  <div className="font-serif text-lg">{o.role}</div>
-                  <div className="mono text-[11px] text-[color:var(--steel)]">{o.atelier} · {o.discipline} · {o.lang}</div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Reveal delay={280}>
+            <JobList />
+          </Reveal>
         </div>
 
         {/* Working at Creeza — Employment */}
@@ -223,13 +269,14 @@ function CareersPage() {
             </div>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {galleryMedia.map((m, i) => (
-              <Reveal key={m.label} delay={i * 80}>
-                <MediaPlaceholder type={m.type} label={m.label} className="aspect-square" />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={220}>
+            <img
+              src={cultureImg}
+              alt="Creeza glazier inspecting glass on the production line"
+              className="mt-12 w-full aspect-[21/9] object-cover"
+              loading="lazy"
+            />
+          </Reveal>
         </div>
 
         {/* Terms and Conditions */}
