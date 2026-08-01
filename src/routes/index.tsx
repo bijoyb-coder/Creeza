@@ -10,7 +10,7 @@ import heroImg2 from "@/assets/hero-glass-2.jpg";
 import heroImg3 from "@/assets/hero-glass-3.jpg";
 import heroImg4 from "@/assets/hero-glass-4.jpg";
 
-import meridianImg from "@/assets/meridian-tower.jpg";
+import meridianImg from "@/assets/Featured.jpg";
 import archImg from "@/assets/product-architectural.jpg";
 import autoImg from "@/assets/product-automotive.jpg";
 import solarImg from "@/assets/product-solar.jpg";
@@ -125,7 +125,7 @@ function Home() {
         <div className="relative z-10 container-x">
           <Reveal><div className="mono text-[11px] tracking-[0.22em] uppercase text-[#D2AC72]">Featured</div></Reveal>
           <Reveal delay={120}>
-            <h2 className={headlineCls + " mt-6"} style={headlineSize}>The Meridian Tower.</h2>
+            <h2 className={headlineCls + " mt-6 text-[#ECE9E0]"} style={headlineSize}>The Meridian Tower.</h2>
           </Reveal>
           <Reveal delay={220}>
             <p className="mx-auto mt-6 text-[#B9C0BE] max-w-xl">
@@ -172,7 +172,7 @@ function Home() {
           <Reveal delay={320}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link to="/contact" className="btn-pill bg-[color:var(--ink)] text-[color:var(--paper)] border-[color:var(--ink)]">
-                Request a Bespoke Specification
+                Request a Specification
               </Link>
               <Link to="/contact" className="link-arrow">
                 Speak With Us <ArrowRight size={14} />
